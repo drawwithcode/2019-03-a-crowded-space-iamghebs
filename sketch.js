@@ -15,6 +15,8 @@ function preload() {
     busta = loadImage('assets/Busta.png');
     keb = loadImage('assets/kebab.png');
     dead = loadImage('assets/ChiaraDead.png');
+	cooper = loadFont('assets/COOPBL.TTF');
+
 }
 
 
@@ -45,7 +47,7 @@ function draw() {
 		//schermata di perdita
         fill(0);
         textSize(50);
-        textFont('Cooper Black');
+        textFont(cooper);
         textStyle(BOLD);
         textAlign(CENTER, CENTER);
         text('FLOP!', width / 4, height / 2 - 50, width / 2);
