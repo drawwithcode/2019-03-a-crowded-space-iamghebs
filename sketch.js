@@ -87,7 +87,7 @@ function draw() {
         textStyle(BOLD);
         textAlign(LEFT, CENTER);
         var t = "I kebab mangiati sono: " + score;
-        text('Fai mangiare a Chiarona tutti i kebab prima che Busta di piscio riesca a catturarti.', height / 15, height / 15)
+        text('Fai mangiare a Chiarona Dalessandro tutti i kebab prima che Busta Di Piscio riesca a catturarti.', height / 15, height / 15)
         text(t, height / 15, height / 15 + 20);
 
 
