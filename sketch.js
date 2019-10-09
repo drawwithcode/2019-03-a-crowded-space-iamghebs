@@ -15,10 +15,9 @@ function preload() {
     busta = loadImage('assets/Busta.png');
     keb = loadImage('assets/kebab.png');
     dead = loadImage('assets/ChiaraDead.png');
-	cooper = loadFont('assets/COOPBL.TTF');
+    cooper = loadFont('assets/COOPBL.TTF');
 
 }
-
 
 function setup() {
     frameRate(30);
@@ -33,6 +32,7 @@ function setup() {
     }
     //creazione avatar
     chiaretta = new Chiara();
+
 }
 
 function draw() {
@@ -44,7 +44,7 @@ function draw() {
     if (gameOver == true) {
         //avatar morto
         chiaretta.show(dead);
-		//schermata di perdita
+        //schermata di perdita
         fill(0);
         textSize(50);
         textFont(cooper);
@@ -55,15 +55,15 @@ function draw() {
 
 
     } else if (score < 30) {
-		//avatar vivo
-		chiaretta.show(alive);
+        //avatar vivo
+        chiaretta.show(alive);
 
         for (var i = 0; i < buste.length; i++) {
-			//aggiorno posizione avversari
+            //aggiorno posizione avversari
             buste[i].update();
-			//visualizzazione avversari
+            //visualizzazione avversari
             buste[i].show();
-			//se avversari e user si sovrappongono
+            //se avversari e user si sovrappongono
             if (buste[i].eats(chiaretta)) {
                 gameOver = true;
             }
@@ -71,26 +71,28 @@ function draw() {
 
         for (var i = kebabs.length - 1; i >= 0; i--) {
             kebabs[i].show();
-			//se goods e user si sovrappongono
+            //se goods e user si sovrappongono
             if (chiaretta.eats(kebabs[i])) {
-				//goods viene rimosso
-				kebabs.splice(i, 1);
-				//incremento punteggio
+                //goods viene rimosso
+                kebabs.splice(i, 1);
+                //incremento punteggio
                 score++;
             }
         }
 
-		//punteggio
+        //punteggio
         fill(0);
         textSize(20);
         textFont('Cooper Black');
         textStyle(BOLD);
         textAlign(LEFT, CENTER);
         var t = "I kebab mangiati sono: " + score;
-        text(t, height / 15, height / 15);
+        text('Fai mangiare a Chiarona tutti i kebab prima che Busta di piscio riesca a catturarti.', height / 15, height / 15)
+        text(t, height / 15, height / 15 + 20);
+
 
     } else {
-		//schermata di vittoria
+        //schermata di vittoria
         chiaretta.show(alive);
         fill(0);
         textSize(50);
@@ -109,15 +111,15 @@ function Kebab(x, y) {
     this.pos = createVector(x, y);
 
     this.show = function() {
-		//centratura dell'img
+        //centratura dell'img
         image(keb, this.pos.x - (kebWidth / 2), this.pos.y - (kebHeight / 2), kebWidth, kebHeight);
     }
 }
 
 function Chiara() {
-	//posizione che traccia il mouse
+    //posizione che traccia il mouse
     this.pos = createVector(mouseX, mouseY);
-	//dimensione variabile
+    //dimensione variabile
     this.size = spriteSize;
 
     this.show = function(avatar) {
@@ -131,11 +133,11 @@ function Chiara() {
     this.eats = function(keb) {
         //calcolo distanza centro della bolla - punto interessato
         var d = p5.Vector.dist(this.pos, keb.pos)
-		//se distanza minore della somma dei raggi
+        //se distanza minore della somma dei raggi
         if (d < (25 + this.size / 2)) {
-			//avatar ingrassa
-			this.size += 3;
-			//conferma di sovrapposizione
+            //avatar ingrassa
+            this.size += 3;
+            //conferma di sovrapposizione
             return true;
         } else return false;
 
@@ -143,15 +145,15 @@ function Chiara() {
 }
 
 function Busta() {
-	//posizione randomica
+    //posizione randomica
     this.pos = createVector(random(width / 2, width), random(height / 2, height));
 
     this.update = function() {
-		//velocità viene incrementata in base al punteggio
+        //velocità viene incrementata in base al punteggio
         this.speed = score + 1;
-		//vincolo massimo velocità
+        //vincolo massimo velocità
         constrain(this.speed, 1, 9);
-		//calcolo direzione
+        //calcolo direzione
         var vel = createVector(mouseX, mouseY);
         vel.sub(this.pos);
         vel.setMag(1);
@@ -165,7 +167,7 @@ function Busta() {
     this.eats = function(keb) {
         //calcolo distanza
         var d = p5.Vector.dist(this.pos, keb.pos)
-		//conferma o smentita di sovrapposizione
+        //conferma o smentita di sovrapposizione
         if (d < (keb.size + spriteSize) / 2) {
             return true;
             //console.log('KEBABB');
